@@ -1,0 +1,35 @@
+.sidebar-nav {
+    background-color: #0e085c;
+    color: #fff;
+    padding: 50px 10px;
+    width: 25%;
+    height: 100vh;
+}
+
+.sidebar-nav-text {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.sidebar-a-link {
+    text-decoration: none;
+    color: #ffffff
+}
+
+.sidebar-nav-text:hover {
+    background-color: #0f0b49ef;
+    color: #ffffff;
+  }
+
+@media only screen and (max-width: 500px) {
+    .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        width: 100vw;
+        padding-top: 10px;
+        background-color: #0e085c !important;
+        color: #fff;
+        height: auto;
+    }
+}
