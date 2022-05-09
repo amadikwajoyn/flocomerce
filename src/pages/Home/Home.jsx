@@ -4,6 +4,7 @@ import Navbox from '../../components/Navbox/Navbox'
 import ProductCard from '../../components/Productcard/ProductCard'
 import './Home.css'
 
+
 function Home() {
     const [carts, setCarts] = useState(0)
   return (

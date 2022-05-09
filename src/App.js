@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import LoginSignup from "./pages/LoginSignup/LoginSignup";
 import Dashboard from "./pages/Dashboard/Dashboard";
-// import ProtectedRoute from "./components/Route/ProtectedRoute";
 import Home from "./pages/Home/Home";
 import ViewProduct from "./pages/ViewProducts/ViewProduct";
 import "./App.css";
