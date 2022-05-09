@@ -54,7 +54,7 @@ const userData = JSON.parse(localStorage.getItem("chomp-food-user")) || null;
 
   useEffect(() => {
     getProducts();
-  });
+  }, []);
 
   return (
     <div className="product-card-container">

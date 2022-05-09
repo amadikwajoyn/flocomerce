@@ -50,10 +50,10 @@ function ViewProducts() {
   };
   useEffect(() => {
     getProducts();
-  });
+  }, []);
   return (
     <div className="view-product">
-      {loading && <p className="text-center">Loading...</p>}
+      {loading && <p className="text-center"></p>}
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
