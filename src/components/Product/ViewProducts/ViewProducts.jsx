@@ -50,7 +50,8 @@ function ViewProducts() {
   };
   useEffect(() => {
     getProducts();
-  }, [getProducts]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="view-product">
       {loading && <p className="text-center"></p>}

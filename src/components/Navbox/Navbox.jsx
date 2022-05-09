@@ -3,7 +3,7 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { ReactComponent as Cart } from "../../assets/cart.svg"
 import "./Navbox.css";
 
-function Navbox() {
+function Navbox({ carts }) {
   const userData = JSON.parse(localStorage.getItem("chomp-food-user")) || null;
   const isLoggedin = userData && userData.isLoggedin;
   const isAdmin = isLoggedin && userData.data && userData.data.role === 'ADMIN';
@@ -30,7 +30,7 @@ function Navbox() {
               </Nav.Link>
               {isLoggedin && (
                 <Nav.Link eventKey={2} href="checkout">
-                  <Cart />
+                  <Cart />{carts > 0 ? carts : null}
                 </Nav.Link>
               )}
               {isAdmin && (
@@ -44,6 +44,10 @@ function Navbox() {
       </Navbar>
     </>
   );
+}
+
+Navbox.defaultProps = {
+    carts: 0,
 }
 
 export default Navbox;
