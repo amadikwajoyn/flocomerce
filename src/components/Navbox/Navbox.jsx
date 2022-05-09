@@ -21,7 +21,7 @@ function Navbox({ carts }) {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
               <Nav.Link
-                href={isLoggedin ? "/" : "/auth"}
+                href={isLoggedin ? "/" : "auth"}
                 onClick={() =>
                   isLoggedin ? localStorage.removeItem("chomp-food-user") : null
                 }
@@ -29,12 +29,12 @@ function Navbox({ carts }) {
                 {isLoggedin ? "Logout" : "Login"}
               </Nav.Link>
               {isLoggedin && (
-                <Nav.Link eventKey={2} href="/checkout">
+                <Nav.Link eventKey={2} href="checkout">
                   <Cart />{carts > 0 ? carts : null}
                 </Nav.Link>
               )}
               {isAdmin && (
-                <Nav.Link eventKey={2} href="/dashboard">
+                <Nav.Link eventKey={2} href="dashboard">
                   Dashboard
                 </Nav.Link>
               )}
