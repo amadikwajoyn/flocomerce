@@ -50,7 +50,7 @@ function ViewProducts() {
   };
   useEffect(() => {
     getProducts();
-  }, []);
+  });
   return (
     <div className="view-product">
       {loading && <p className="text-center">Loading...</p>}

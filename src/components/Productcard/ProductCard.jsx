@@ -8,7 +8,7 @@ function ProductCard() {
 const userData = JSON.parse(localStorage.getItem("chomp-food-user")) || null;
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState()
+//   const [cart, setCart] = useState()
   const getProducts = async () => {
     setLoading(true);
     try {
@@ -54,10 +54,11 @@ const userData = JSON.parse(localStorage.getItem("chomp-food-user")) || null;
 
   useEffect(() => {
     getProducts();
-  }, []);
+  });
 
   return (
     <div className="product-card-container">
+      {loading && <p className="text-center">Loading...</p>}
         <Row>
           {products.length ?
             products.map((item, i) => (
