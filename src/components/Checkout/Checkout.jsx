@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Checkout.css";
+import { Modal } from "react-bootstrap";
+import Button from "@restart/ui/esm/Button";
+import { useNavigate } from "react-router-dom"
 
 function Checkout() {
   const userData = JSON.parse(localStorage.getItem("chomp-food-user")) || null;
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
+  const [inputs, setInputs] = useState({});
+  const [show, setShow] = useState(false)
+  const navigate = useNavigate()
+
+  const handleClose = () => setShow(!show)
+
+  const onChange = ({ target: { name, value } }) => {
+    setInputs({ ...inputs, [name]: value });
+  };
 
   const getCarts = async () => {
     setLoading(true);
@@ -27,6 +39,11 @@ function Checkout() {
     }
   };
 
+  const onSubmit = (e) => {
+    if (!products.length) return
+    handleClose()
+  }
+
   useEffect(() => {
     getCarts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,9 +53,20 @@ function Checkout() {
       <h2>Checkout Flowers</h2>
       <p>NOTE: Kindly Confirm your products before checking out.</p>
       <div className="row">
+      <Modal show={show} onHide={() => {}}>
+        <Modal.Body>Order has been made. Item(s) will be sent to with the next 14 days</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => {
+            handleClose()
+            navigate('/')
+          }}>
+            Go to Home
+          </Button>
+        </Modal.Footer>
+      </Modal>
         <div className="col-75">
           <div className="container">
-            <form>
+            <form onSubmit={onSubmit}>
               <div className="row">
                 <div className="col-50">
                   <h3>Billing Address</h3>
@@ -50,15 +78,21 @@ function Checkout() {
                     id="fname"
                     name="firstname"
                     placeholder="John M. Doe"
+                    className=" form-control"
+                    onChange={onChange}
+                    required
                   />
                   <label for="email">
                     <i className="fa fa-envelope"></i> Email
                   </label>
                   <input
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
                     placeholder="john@example.com"
+                    className=" form-control"
+                    onChange={onChange}
+                    required
                   />
                   <label for="adr">
                     <i className="fa fa-address-card-o"></i> Address
@@ -68,6 +102,9 @@ function Checkout() {
                     id="adr"
                     name="address"
                     placeholder="542 W. 15th Street"
+                    onChange={onChange}
+                    className=" form-control"
+                    required
                   />
                   <label for="city">
                     <i className="fa fa-institution"></i> City
@@ -77,6 +114,9 @@ function Checkout() {
                     id="city"
                     name="city"
                     placeholder="New York"
+                    onChange={onChange}
+                    className=" form-control"
+                    required
                   />
 
                   <div className="row">
@@ -87,6 +127,9 @@ function Checkout() {
                         id="state"
                         name="state"
                         placeholder="NY"
+                        onChange={onChange}
+                    className=" form-control"
+                        required
                       />
                     </div>
                     <div className="col-50">
@@ -96,6 +139,9 @@ function Checkout() {
                         id="zip"
                         name="zip"
                         placeholder="10001"
+                        onChange={onChange}
+                        className=" form-control"
+                        required
                       />
                     </div>
                   </div>
@@ -121,7 +167,10 @@ function Checkout() {
                     type="text"
                     id="cname"
                     name="cardname"
+                    className=" form-control"
                     placeholder="John More Doe"
+                    onChange={onChange}
+                    required
                   />
                   <label for="ccnum">Credit card number</label>
                   <input
@@ -129,6 +178,9 @@ function Checkout() {
                     id="ccnum"
                     name="cardnumber"
                     placeholder="1111-2222-3333-4444"
+                    className=" form-control"
+                    onChange={onChange}
+                    required
                   />
                   <label for="expmonth">Exp Month</label>
                   <input
@@ -136,6 +188,9 @@ function Checkout() {
                     id="expmonth"
                     name="expmonth"
                     placeholder="September"
+                    className=" form-control"
+                    onChange={onChange}
+                    required
                   />
                   <div className="row">
                     <div className="col-50">
@@ -145,6 +200,9 @@ function Checkout() {
                         id="expyear"
                         name="expyear"
                         placeholder="2018"
+                    className=" form-control"
+                        onChange={onChange}
+                        required
                       />
                     </div>
                     <div className="col-50">
@@ -154,6 +212,9 @@ function Checkout() {
                         id="cvv"
                         name="cvv"
                         placeholder="352"
+                    className=" form-control"
+                        onChange={onChange}
+                        required
                       />
                     </div>
                   </div>
@@ -194,7 +255,10 @@ function Checkout() {
                 <b>
                   $
                   {products.length
-                    ? products.reduce((partialSum, a) => partialSum + a.amount, 0)
+                    ? products.reduce(
+                        (partialSum, a) => partialSum + a.amount,
+                        0
+                      )
                     : 0}
                 </b>
               </span>
